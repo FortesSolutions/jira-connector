@@ -95,7 +95,7 @@ function ProjectClient(jiraClient) {
      * @return {Promise} Resolved when the project has been created.
      */
     this.createProject = function (project, callback) {
-       
+
         var options = {
             uri: this.jiraClient.buildURL('/project'),
             method: 'POST',
@@ -299,7 +299,6 @@ function ProjectClient(jiraClient) {
         var basePath = opts.projectIdOrKey ? '/project/' + opts.projectIdOrKey : '/project';
 
         if (!qs) qs = {};
-        if (!body) body = {};
 
         if (opts.fields) {
             qs.fields = '';

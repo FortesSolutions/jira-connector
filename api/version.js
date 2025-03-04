@@ -17,14 +17,14 @@ function VersionClient(jiraClient) {
      * @memberOf VersionClient#
      * @param {Object} opts Details about a project version.
      * @param {string} [opts.version] Body. See {@link https://docs.atlassian.com/jira/REST/latest/#d2e3549}
-     * @param {string} [opts.expand] 
+     * @param {string} [opts.expand]
      * @param {string} [opts.description] The description of the version. Optional when creating or updating a version.
      * @param {string} [opts.name] The unique name of the version. Required when creating a version. Optional when updating a version. The maximum length is 255 characters.
      * @param {boolean} [opts.archived] Indicates that the version is archived. Optional when creating or updating a version.
      * @param {boolean} [opts.released] Indicates that the version is released. If the version is released a request to release again is ignored. Not applicable when creating a version. Optional when updating a version.
      * @param {string} [opts.startDate] The start date of the version. Expressed in ISO 8601 format (yyyy-mm-dd). Optional when creating or updating a version.
      * @param {string} [opts.releaseDate] The release date of the version. Expressed in ISO 8601 format (yyyy-mm-dd). Optional when creating or updating a version.
-     * @deprecated @param {string} [opts.project] Deprecated. Use projectId. 
+     * @deprecated @param {string} [opts.project] Deprecated. Use projectId.
      * @param {number} [opts.projectId] The ID of the project to which this version is attached. Required when creating a version. Not applicable when updating a version.
      * @param {string} [opts.moveUnfixedIssuesTo] The URL of the self link to the version to which all unfixed issues are moved when a version is released. Not applicable when creating a version. Optional when updating a version.
      * @param {callback} [callback] Called when the version has been created.
@@ -293,7 +293,7 @@ function VersionClient(jiraClient) {
     this.buildRequestOptions = function (opts, path, method, body, qs) {
         var basePath = '/version/' + opts.versionId;
         if (!qs) qs = {};
-        if (!body) body = {};
+        if (!body && method !== 'GET') body = {}; // Empty body on GET triggers 403 from Atlassian
 
         if (opts.fields) {
             qs.fields = '';

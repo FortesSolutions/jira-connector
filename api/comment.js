@@ -111,7 +111,7 @@ function CommentClient(jiraClient) {
         }
         var basePath = '/comment/' + opts.commentId + "/properties";
         if (!qs) qs = {};
-        if (!body) body = {};
+        if (!body && method !== 'GET') body = {}; // Empty body on GET triggers 403 from Atlassian
 
         if (opts.fields) {
             qs.fields = '';
